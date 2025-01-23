@@ -20,20 +20,20 @@ It will:
 ### Checksums
 
 ```shell
-wget https://github.com/goreleaser/supply-chain-example/releases/download/v1.3.3/checksums.txt
+wget https://github.com/goreleaser/supply-chain-example/releases/download/v1.3.4/checksums.txt
 cosign verify-blob \
-    --certificate-identity 'https://github.com/goreleaser/example-supply-chain/.github/workflows/release.yml@refs/tags/v1.3.3' \
+    --certificate-identity 'https://github.com/goreleaser/example-supply-chain/.github/workflows/release.yml@refs/tags/v1.3.4' \
     --certificate-oidc-issuer 'https://token.actions.githubusercontent.com' \
-    --cert https://github.com/goreleaser/example-supply-chain/releases/download/v1.3.3/checksums.txt.pem \
-    --signature https://github.com/goreleaser/example-supply-chain/releases/download/v1.3.3/checksums.txt.sig \
+    --cert https://github.com/goreleaser/example-supply-chain/releases/download/v1.3.4/checksums.txt.pem \
+    --signature https://github.com/goreleaser/example-supply-chain/releases/download/v1.3.4/checksums.txt.sig \
     ./checksums.txt
 ```
 
 You can then download any file you want from the release, and verify it with, for example:
 
 ```shell
-wget https://github.com/goreleaser/example-supply-chain/releases/download/v1.3.3/supply-chain-example_1.3.3_linux_amd64.tar.gz.sbom.json
-wget https://github.com/goreleaser/example-supply-chain/releases/download/v1.3.3/supply-chain-example_1.3.3_linux_amd64.tar.gz
+wget https://github.com/goreleaser/example-supply-chain/releases/download/v1.3.4/supply-chain-example_1.3.4_linux_amd64.tar.gz.sbom.json
+wget https://github.com/goreleaser/example-supply-chain/releases/download/v1.3.4/supply-chain-example_1.3.4_linux_amd64.tar.gz
 sha256sum --ignore-missing -c checksums.txt
 ```
 
@@ -54,8 +54,8 @@ gh attestation verify --owner goreleaser *.tar.gz
 
 ```shell
 cosign verify \
-  --certificate-identity 'https://github.com/goreleaser/example-supply-chain/.github/workflows/release.yml@refs/tags/v1.3.3' \
+  --certificate-identity 'https://github.com/goreleaser/example-supply-chain/.github/workflows/release.yml@refs/tags/v1.3.4' \
   --certificate-oidc-issuer 'https://token.actions.githubusercontent.com' \
-  --cert https://github.com/goreleaser/example-supply-chain/releases/download/v1.3.3/checksums.txt.pem \
-  ghcr.io/goreleaser/example-supply-chain:v1.3.3
+  --cert https://github.com/goreleaser/example-supply-chain/releases/download/v1.3.4/checksums.txt.pem \
+  ghcr.io/goreleaser/example-supply-chain:v1.3.4
 ```
