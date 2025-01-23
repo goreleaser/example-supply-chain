@@ -8,12 +8,13 @@ name: release
 on:
   push:
     tags:
-      - 'v*'
+      - "v*"
 
 permissions:
-   contents: write # needed to write releases
-   id-token: write # needed for keyless signing
-   packages: write # needed for ghcr access
+  contents: write # needed to write releases
+  id-token: write # needed for keyless signing
+  packages: write # needed for ghcr access
+  attestations: write # needed for provenance
 
 jobs:
   release:
@@ -26,16 +27,19 @@ jobs:
         with:
           go-version: 1.19
           cache: true
-      - uses: sigstore/cosign-installer@v3.7.0         # installs cosign
+      - uses: sigstore/cosign-installer@v3.7.0 # installs cosign
       - uses: anchore/sbom-action/download-syft@v0.17.9 # installs syft
-      - uses: docker/login-action@v3                   # login to ghcr
+      - uses: docker/login-action@v3 # login to ghcr
         with:
           registry: ghcr.io
           username: ${{ github.repository_owner }}
           password: ${{ secrets.GITHUB_TOKEN }}
-      - uses: goreleaser/goreleaser-action@v6          # run goreleaser
+      - uses: goreleaser/goreleaser-action@v6 # run goreleaser
         with:
           version: latest
           args: release --clean
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - uses: actions/attest-build-provenance@v2
+        with:
+          subject-checksums: ./dist/checksums.txt
