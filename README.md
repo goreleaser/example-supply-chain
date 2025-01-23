@@ -22,18 +22,18 @@ It will:
 ```shell
 wget https://github.com/goreleaser/supply-chain-example/releases/download/v1.3.3/checksums.txt
 cosign verify-blob \
-  --certificate-identity 'https://github.com/goreleaser/goreleaser-example-supply-chain/.github/workflows/release.yml@refs/tags/v1.3.3' \
-  --certificate-oidc-issuer 'https://token.actions.githubusercontent.com' \
-  --cert https://github.com/goreleaser/supply-chain-example/releases/download/v1.3.3/checksums.txt.pem \
-  --signature https://github.com/goreleaser/supply-chain-example/releases/download/v1.3.3/checksums.txt.sig \
-  ./checksums.txt
+    --certificate-identity 'https://github.com/goreleaser/example-supply-chain/.github/workflows/release.yml@refs/tags/v1.3.3' \
+    --certificate-oidc-issuer 'https://token.actions.githubusercontent.com' \
+    --cert https://github.com/goreleaser/example-supply-chain/releases/download/v1.3.3/checksums.txt.pem \
+    --signature https://github.com/goreleaser/example-supply-chain/releases/download/v1.3.3/checksums.txt.sig \
+    ./checksums.txt
 ```
 
 You can then download any file you want from the release, and verify it with, for example:
 
 ```shell
-wget https://github.com/goreleaser/supply-chain-example/releases/download/v1.3.3/supply-chain-example_1.3.1_linux_amd64.tar.gz.sbom
-wget https://github.com/goreleaser/supply-chain-example/releases/download/v1.3.3/supply-chain-example_1.3.1_linux_amd64.tar.gz
+wget https://github.com/goreleaser/example-supply-chain/releases/download/v1.3.3/supply-chain-example_1.3.3_linux_amd64.tar.gz.sbom.json
+wget https://github.com/goreleaser/example-supply-chain/releases/download/v1.3.3/supply-chain-example_1.3.3_linux_amd64.tar.gz
 sha256sum --ignore-missing -c checksums.txt
 ```
 
@@ -47,7 +47,7 @@ This example also publishes build attestations.
 You can verify any artifact with:
 
 ```shell
-gh attestation verify --owner goreleaser <file>
+gh attestation verify --owner goreleaser *.tar.gz
 ```
 
 ### Docker image
