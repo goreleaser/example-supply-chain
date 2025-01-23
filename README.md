@@ -53,5 +53,9 @@ gh attestation verify --owner goreleaser *.tar.gz
 ### Docker image
 
 ```shell
-COSIGN_EXPERIMENTAL=1 cosign verify ghcr.io/goreleaser/supply-chain-example:v1.3.3
+cosign verify \
+  --certificate-identity 'https://github.com/goreleaser/example-supply-chain/.github/workflows/release.yml@refs/tags/v1.3.3' \
+  --certificate-oidc-issuer 'https://token.actions.githubusercontent.com' \
+  --cert https://github.com/goreleaser/example-supply-chain/releases/download/v1.3.3/checksums.txt.pem \
+  ghcr.io/goreleaser/example-supply-chain:v1.3.3
 ```

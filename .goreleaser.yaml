@@ -55,8 +55,6 @@ sboms:
 # https://goreleaser.com/customization/sign
 signs:
   - cmd: cosign
-    env:
-      - COSIGN_EXPERIMENTAL=1
     certificate: "${artifact}.pem"
     args:
       - sign-blob
@@ -71,7 +69,7 @@ signs:
 # https://goreleaser.com/customization/docker
 dockers:
   - image_templates:
-      - "ghcr.io/goreleaser/supply-chain-example:{{ .Tag }}"
+      - "ghcr.io/goreleaser/example-supply-chain:{{ .Tag }}"
     dockerfile: Dockerfile
     build_flag_templates:
       - "--pull"
@@ -85,8 +83,6 @@ dockers:
 # https://goreleaser.com/customization/docker_sign
 docker_signs:
   - cmd: cosign
-    env:
-      - COSIGN_EXPERIMENTAL=1
     artifacts: images
     output: true
     args:
