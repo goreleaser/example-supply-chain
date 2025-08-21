@@ -35,10 +35,14 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
       - uses: goreleaser/goreleaser-action@v6 # run goreleaser
         with:
-          version: latest
+          distribution: goreleaser-pro
+          version: "nightly"
           args: release --clean
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - uses: actions/attest-build-provenance@v2
         with:
           subject-checksums: ./dist/checksums.txt
+      - uses: actions/attest-build-provenance@v2
+        with:
+          subject-checksums: ./dist/digests.txt
