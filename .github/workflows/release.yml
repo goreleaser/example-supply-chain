@@ -44,4 +44,3 @@ jobs:
       - uses: actions/attest-build-provenance@v2
         with:
           subject-checksums: ./dist/digests.txt
-      - run: cat ./dist/digests.txt
