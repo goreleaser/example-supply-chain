@@ -23,7 +23,7 @@ jobs:
       - uses: actions/checkout@v5
         with:
           fetch-depth: 0 # this is important, otherwise it won't checkout the full tree (i.e. no previous tags)
-      - uses: actions/setup-go@v5
+      - uses: actions/setup-go@v6
         with:
           go-version: stable
       - uses: sigstore/cosign-installer@v3.9.2 # installs cosign
