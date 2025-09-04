@@ -67,26 +67,26 @@ signs:
 
 # create a docker image
 # https://goreleaser.com/customization/docker
-dockers:
-  - image_templates:
-      - "ghcr.io/goreleaser/example-supply-chain:{{ .Tag }}"
+dockers_v2:
+  - images:
+      - "ghcr.io/goreleaser/example-supply-chain"
+    tags:
+      - latest
+      - "{{ .Tag }}"
     dockerfile: Dockerfile
-    build_flag_templates:
-      - "--pull"
-      - "--label=org.opencontainers.image.created={{.Date}}"
-      - "--label=org.opencontainers.image.name={{.ProjectName}}"
-      - "--label=org.opencontainers.image.revision={{.FullCommit}}"
-      - "--label=org.opencontainers.image.version={{.Version}}"
-      - "--label=org.opencontainers.image.source={{.GitURL}}"
+    labels:
+      org.opencontainers.image.created: "{{.Date}}"
+      org.opencontainers.image.name: "{{.ProjectName}}"
+      org.opencontainers.image.revision: "{{.FullCommit}}"
+      org.opencontainers.image.version: "{{.Version}}"
+      org.opencontainers.image.source: "{{.GitURL}}"
 
 # signs our docker image
 # https://goreleaser.com/customization/docker_sign
 docker_signs:
   - cmd: cosign
-    artifacts: images
     output: true
     args:
       - "sign"
       - "${artifact}"
-      - "--yes" # needed on cosign 2.0.0+
-
+      - "--yes"
