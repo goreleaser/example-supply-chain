@@ -82,7 +82,7 @@ dockers_v2:
       org.opencontainers.image.source: "{{.GitURL}}"
       org.opencontainers.image.description: "Example goreleaser + github actions config with keyless signing, SBOM generation, and attestations"
     annotations:
-      org.opencontainers.image.description: "Example goreleaser + github actions config with keyless signing, SBOM generation, and attestations"
+      "index:org.opencontainers.image.description": "Example goreleaser + github actions config with keyless signing, SBOM generation, and attestations"
 
 # signs our docker image
 # https://goreleaser.com/customization/docker_sign
