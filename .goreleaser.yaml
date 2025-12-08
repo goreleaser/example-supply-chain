@@ -43,6 +43,16 @@ checksum:
 # https://goreleaser.com/customization/source/
 source:
   enabled: true
+  name_template: "{{ .ProjectName }}.src"
+
+# config the archives filenames, format, and other options.
+# https://goreleaser.com/customization/archive
+archives:
+  - formats: [tar.gz]
+    wrap_in_directory: true
+    name_template: "{{ .ProjectName }}_{{ .Os }}_{{ .Arch }}"
+    builds_info:
+      mtime: "{{ .CommitTimestamp }}"
 
 # creates SBOMs of all archives and the source tarball using syft
 # https://goreleaser.com/customization/sbom
