@@ -21,11 +21,11 @@ It will:
 
 ```shell
 wget https://github.com/goreleaser/supply-chain-example/releases/download/v1.3.4/checksums.txt
+wget https://github.com/goreleaser/example-supply-chain/releases/download/v1.3.4/checksums.txt.sigstore.json
 cosign verify-blob \
     --certificate-identity 'https://github.com/goreleaser/example-supply-chain/.github/workflows/release.yml@refs/tags/v1.3.4' \
     --certificate-oidc-issuer 'https://token.actions.githubusercontent.com' \
-    --cert https://github.com/goreleaser/example-supply-chain/releases/download/v1.3.4/checksums.txt.pem \
-    --signature https://github.com/goreleaser/example-supply-chain/releases/download/v1.3.4/checksums.txt.sig \
+    --bundle checksums.txt.sigstore.json \
     ./checksums.txt
 ```
 
