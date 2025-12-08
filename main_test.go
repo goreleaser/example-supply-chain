@@ -1,6 +1,6 @@
 package main
 
-func ExampleMain() { // nolint:govet
+func Example() { // nolint:govet
 	main()
 	// Output:
 	// yaml:
